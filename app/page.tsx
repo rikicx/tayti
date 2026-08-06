@@ -141,7 +141,9 @@ export default function Home() {
             <a className="text-link" href="#lojas">Encontrar uma Tayti</a>
           </div>
           <div className="hero__signature">
-            <span className="signature-mark">E</span>
+            <span className="signature-mark" aria-hidden="true">
+              <img src="/images/chef-elisabeth.jpg" alt="" />
+            </span>
             <p><strong>Por Chef Elisabeth Tayti</strong><br />Mestre gelatier & especialista em confeitaria</p>
           </div>
         </div>
@@ -222,7 +224,7 @@ export default function Home() {
         <div className="chef-window__content section-shell">
           <div className="chef-window__copy" data-reveal>
             <p className="eyebrow">A criadora por trás de cada receita</p>
-            <h2>Ciência, técnica<br />e sensibilidade.</h2>
+            <h2>Ciência, técnica e sensibilidade.</h2>
             <p className="chef-window__lead">
               Mestre gelatier, especialista em confeitaria e panificação, formada
               em Gastronomia, Química Industrial e Segurança de Alimentos.
@@ -243,7 +245,7 @@ export default function Home() {
 
       <section className="experience section-shell" id="experiencia">
         <div className="section-heading" data-reveal>
-          <div><p className="eyebrow">Muito além da casquinha</p><h2>Uma pausa<br />à moda Tayti.</h2></div>
+          <div><p className="eyebrow">Muito além da casquinha</p><h2>Uma pausa à moda Tayti.</h2></div>
           <p>Gelato, café, confeitaria e encontros — feitos para serem aproveitados sem pressa.</p>
         </div>
         <div className="experience-grid">
