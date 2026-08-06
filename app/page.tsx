@@ -16,6 +16,8 @@ const stores = [
     name: "Moema",
     type: "Matriz",
     address: "Alameda dos Jurupis, 843 — Moema, São Paulo",
+    image: "/images/fachada-moema.jpg",
+    imageAlt: "Fachada da unidade Tayti Moema ao anoitecer",
     whatsapp: "https://wa.me/5511977571111",
     rappi:
       "https://www.rappi.com.br/restaurantes/900143461-tayti-gelateria-e-cafe",
@@ -28,6 +30,8 @@ const stores = [
     name: "Klabin / Ipiranga",
     type: "Loja & fábrica",
     address: "Rua Mariz e Barros, 365 — Chácara Klabin, São Paulo",
+    image: "/images/fachada-klabin.jpg",
+    imageAlt: "Fachada da unidade Tayti Klabin e Ipiranga",
     whatsapp: "https://wa.me/5511945931192",
     rappi:
       "https://www.rappi.com.br/restaurantes/900655556-tayti-gelateria-e-cafe",
@@ -110,6 +114,7 @@ export default function Home() {
           <a href="#sabores" onClick={closeMenu}>Sabores</a>
           <a href="#chef" onClick={closeMenu}>A chef</a>
           <a href="#experiencia" onClick={closeMenu}>Experiência</a>
+          <a href="#eventos" onClick={closeMenu}>Eventos</a>
           <a href="#lojas" onClick={closeMenu}>Lojas</a>
         </nav>
         <a className="header-order" href="#lojas">Pedir agora <Arrow /></a>
@@ -261,8 +266,30 @@ export default function Home() {
             <p className="eyebrow">Celebre com a Tayti</p>
             <h3>Gelato que vai até o seu evento.</h3>
             <p>Carrettino refrigerado, vitrine e formatos para encontros de diferentes tamanhos.</p>
-            <a href="https://wa.me/5511977571111?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20eventos%20com%20a%20Tayti." target="_blank" rel="noreferrer">Pedir orçamento <Arrow /></a>
+            <a href="#eventos">Conhecer os formatos <Arrow /></a>
           </article>
+        </div>
+      </section>
+
+      <section className="events" id="eventos">
+        <div className="events__photo" data-reveal>
+          <img src="/images/eventos-carrettino.jpg" alt="Carrettino Tayti servindo gelatos em uma celebração" />
+        </div>
+        <div className="events__copy" data-reveal>
+          <p className="eyebrow">Eventos Tayti</p>
+          <h2>A Tayti vai até a sua celebração.</h2>
+          <p className="events__intro">
+            Diferentes formatos para servir gelato em casamentos, aniversários,
+            encontros corporativos e celebrações mais íntimas.
+          </p>
+          <div className="events__formats">
+            <div><span>01</span><p><strong>Carrettino</strong> Carrinho refrigerado com até oito sabores e equipe Tayti.</p></div>
+            <div><span>02</span><p><strong>Vitrine compacta</strong> Duas travessas de gelato para eventos de médio porte.</p></div>
+            <div><span>03</span><p><strong>Encontros íntimos</strong> Reserva na loja, potes de viagem ou tortas de gelato.</p></div>
+          </div>
+          <a className="events__cta" href="https://wa.me/5511977571111?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20um%20evento%20com%20a%20Tayti." target="_blank" rel="noreferrer">
+            Solicitar orçamento <Arrow />
+          </a>
         </div>
       </section>
 
@@ -308,6 +335,10 @@ export default function Home() {
         <div className="store-grid section-shell">
           {stores.map((store, index) => (
             <article className="store-card" data-reveal key={store.name}>
+              <a className="store-card__photo" href={store.maps} target="_blank" rel="noreferrer">
+                <img src={store.image} alt={store.imageAlt} />
+                <span>Ver no mapa <Arrow /></span>
+              </a>
               <div className="store-card__top">
                 <span>0{index + 1}</span>
                 <p>{store.type}</p>
@@ -344,7 +375,7 @@ export default function Home() {
         </div>
         <div className="footer__nav">
           <span>Explore</span>
-          <a href="#sabores">Sabores</a><a href="#chef">A chef</a><a href="#experiencia">Experiência</a><a href="#lojas">Lojas</a>
+          <a href="#sabores">Sabores</a><a href="#chef">A chef</a><a href="#experiencia">Experiência</a><a href="#eventos">Eventos</a><a href="#lojas">Lojas</a>
         </div>
         <div className="footer__social">
           <span>Acompanhe</span>
