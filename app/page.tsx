@@ -47,6 +47,8 @@ export default function Home() {
 
   useEffect(() => {
     const nodes = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const parallaxNodes = document.querySelectorAll<HTMLElement>("[data-parallax]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -60,7 +62,33 @@ export default function Home() {
     );
 
     nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
+
+    let frame = 0;
+    const updateParallax = () => {
+      parallaxNodes.forEach((node) => {
+        const rect = node.getBoundingClientRect();
+        const speed = Number(node.dataset.parallax ?? 0.05);
+        const distance = window.innerHeight / 2 - (rect.top + rect.height / 2);
+        node.style.setProperty("--parallax-y", `${distance * speed}px`);
+      });
+      frame = 0;
+    };
+    const requestParallax = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateParallax);
+    };
+
+    if (!prefersReducedMotion) {
+      updateParallax();
+      window.addEventListener("scroll", requestParallax, { passive: true });
+      window.addEventListener("resize", requestParallax);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestParallax);
+      window.removeEventListener("resize", requestParallax);
+    };
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
@@ -117,7 +145,7 @@ export default function Home() {
         </div>
 
         <div className="hero__visual" aria-label="Gelatos Tayti servidos em casquinhas">
-          <div className="hero__photo-wrap">
+          <div className="hero__photo-wrap" data-parallax="0.035">
             <img src="/images/gelato-detail-01.jpg" alt="Três gelatos Tayti servidos em casquinhas" />
           </div>
           <div className="hero__seal" aria-hidden="true">
@@ -138,6 +166,7 @@ export default function Home() {
       </div>
 
       <section className="manifesto section-shell" id="sabores">
+        <span className="manifesto__orb" data-parallax="0.1" aria-hidden="true" />
         <div className="manifesto__heading" data-reveal>
           <p className="eyebrow">Nosso jeito de fazer</p>
           <h2>Menos pressa.<br />Mais sabor.</h2>
@@ -157,7 +186,7 @@ export default function Home() {
       </section>
 
       <section className="texture-panel" data-reveal>
-        <img src="/images/gelatos.jpg" alt="Texturas de diferentes sabores de gelato Tayti" />
+        <img data-parallax="0.035" src="/images/gelatos.jpg" alt="Texturas de diferentes sabores de gelato Tayti" />
       </section>
 
       <section className="flavors section-shell">
@@ -186,7 +215,7 @@ export default function Home() {
 
       <section className="chef" id="chef">
         <div className="chef__portrait" data-reveal>
-          <img src="/images/chef-elisabeth.jpg" alt="Chef Elisabeth Tayti em sua cozinha" />
+          <img data-parallax="0.035" src="/images/chef-elisabeth.jpg" alt="Chef Elisabeth Tayti em sua cozinha" />
           <span className="chef__portrait-label">Elisabeth Tayti</span>
         </div>
         <div className="chef__copy" data-reveal>
@@ -228,6 +257,39 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="reviews">
+        <div className="reviews__intro section-shell" data-reveal>
+          <div className="reviews__score">
+            <span className="reviews__platform">Google</span>
+            <strong>4,8</strong>
+            <span className="reviews__stars" aria-label="4,8 de 5 estrelas">★★★★★</span>
+            <small>Mais de 700 avaliações</small>
+          </div>
+          <div className="reviews__heading">
+            <p className="eyebrow">Falado por quem prova</p>
+            <h2>O sabor fica.<br />O cuidado também.</h2>
+            <a className="text-link" href="https://www.google.com/search?q=tayti+gelateria" target="_blank" rel="noreferrer">Ver avaliações no Google <Arrow /></a>
+          </div>
+        </div>
+        <div className="review-grid section-shell">
+          <article className="review-card" data-reveal>
+            <span className="review-card__stars" aria-hidden="true">★★★★★</span>
+            <blockquote>“Sabor excepcional e atendimento impecável! Estão de parabéns!”</blockquote>
+            <p>Matheus Pereira <span>· Google</span></p>
+          </article>
+          <article className="review-card" data-reveal>
+            <span className="review-card__stars" aria-hidden="true">★★★★★</span>
+            <blockquote>“Maravilhoso! Atendimento super humanizado e acolhedor.”</blockquote>
+            <p>Murilo Cesar <span>· Google</span></p>
+          </article>
+          <article className="review-card" data-reveal>
+            <span className="review-card__stars" aria-hidden="true">★★★★★</span>
+            <blockquote>“Pistache surreal, iogurte e pé de moleque foram as dicas da Tayti. Experiência única!”</blockquote>
+            <p>Alvamar Cirne <span>· Google</span></p>
+          </article>
+        </div>
+      </section>
+
       <section className="stores" id="lojas">
         <div className="stores__heading section-shell" data-reveal>
           <p className="eyebrow">Duas lojas, a mesma Tayti</p>
@@ -257,7 +319,7 @@ export default function Home() {
       </section>
 
       <section className="visit-banner">
-        <div className="visit-banner__photo"><img src="/images/loja-moema.jpg" alt="Ambiente acolhedor de uma loja Tayti ao anoitecer" /></div>
+        <div className="visit-banner__photo"><img data-parallax="0.035" src="/images/loja-moema.jpg" alt="Ambiente acolhedor de uma loja Tayti ao anoitecer" /></div>
         <div className="visit-banner__copy" data-reveal>
           <p className="eyebrow">Fique mais um pouco</p>
           <h2>Um lugar para provar, conversar e voltar.</h2>
