@@ -296,7 +296,7 @@ export default function Home() {
       <section className="reviews">
         <div className="reviews__intro section-shell" data-reveal>
           <div className="reviews__score">
-            <span className="reviews__platform">Google</span>
+            <span className="reviews__platform"><img src="/images/google-logo.webp" alt="Google" /></span>
             <strong>4,8</strong>
             <span className="reviews__stars" aria-label="4,8 de 5 estrelas">★★★★★</span>
             <small>Mais de 700 avaliações</small>
