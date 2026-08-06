@@ -215,24 +215,29 @@ export default function Home() {
         <p className="availability">Consulte os sabores disponíveis do dia em cada unidade.</p>
       </section>
 
-      <section className="chef" id="chef">
-        <div className="chef__portrait" data-reveal>
-          <img data-parallax="0.065" src="/images/chef-elisabeth.jpg" alt="Chef Elisabeth Tayti em sua cozinha" />
-          <span className="chef__portrait-label">Elisabeth Tayti</span>
+      <section className="chef-window" id="chef">
+        <div className="chef-window__stage">
+          <img src="/images/chef-elisabeth.jpg" alt="Chef Elisabeth Tayti em sua cozinha" />
         </div>
-        <div className="chef__copy" data-reveal>
-          <p className="eyebrow">A criadora por trás de cada receita</p>
-          <h2>Ciência, técnica<br />e sensibilidade.</h2>
-          <p className="chef__lead">
-            Mestre gelatier, especialista em confeitaria e panificação, formada
-            em Gastronomia, Química Industrial e Segurança de Alimentos.
-          </p>
-          <p>
-            Elisabeth transforma conhecimento em gelatos de sabor preciso e
-            atendimento próximo — uma combinação que faz a Tayti ser, ao mesmo
-            tempo, autoral e acolhedora.
-          </p>
-          <div className="chef__quote">“O melhor ingrediente é aquele que você consegue sentir de verdade.”</div>
+        <div className="chef-window__content section-shell">
+          <div className="chef-window__copy" data-reveal>
+            <p className="eyebrow">A criadora por trás de cada receita</p>
+            <h2>Ciência, técnica<br />e sensibilidade.</h2>
+            <p className="chef-window__lead">
+              Mestre gelatier, especialista em confeitaria e panificação, formada
+              em Gastronomia, Química Industrial e Segurança de Alimentos.
+            </p>
+            <p>
+              Elisabeth transforma conhecimento em gelatos de sabor preciso e
+              atendimento próximo — uma combinação que faz a Tayti ser, ao mesmo
+              tempo, autoral e acolhedora.
+            </p>
+            <div className="chef-window__quote">“O melhor ingrediente é aquele que você consegue sentir de verdade.”</div>
+          </div>
+          <div className="chef-window__identity" data-reveal>
+            <span>Chef & fundadora</span>
+            <strong>Elisabeth Tayti</strong>
+          </div>
         </div>
       </section>
 

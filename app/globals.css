@@ -143,7 +143,7 @@ h1, h2, h3 { font-family: var(--font-display), serif; font-weight: 500; }
 
 .manifesto { padding-block: 150px 120px; display: grid; grid-template-columns: .75fr 1.25fr; gap: 10vw; position: relative; }
 .manifesto__orb { position: absolute; z-index: -1; width: clamp(150px, 18vw, 300px); aspect-ratio: 1; border-radius: 48% 52% 46% 54%; top: 16%; left: 25%; background: rgba(239,100,113,.16); filter: blur(1px); transform: translate3d(0, var(--parallax-y, 0), 0) rotate(14deg); will-change: transform; }
-.manifesto h2, .section-heading h2, .stores h2, .chef h2, .visit-banner h2 { font-size: clamp(62px, 7vw, 112px); line-height: .82; letter-spacing: -.05em; margin: 0; }
+.manifesto h2, .section-heading h2, .stores h2, .chef-window h2, .visit-banner h2 { font-size: clamp(62px, 7vw, 112px); line-height: .82; letter-spacing: -.05em; margin: 0; }
 .manifesto__intro { font-family: var(--font-display), serif; font-size: clamp(28px, 2.5vw, 42px); line-height: 1.22; max-width: 840px; margin-bottom: 68px; }
 .values { border-top: 1px solid var(--line); }
 .values > div { display: grid; grid-template-columns: 54px 190px 1fr; align-items: baseline; gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--line); }
@@ -153,7 +153,7 @@ h1, h2, h3 { font-family: var(--font-display), serif; font-weight: 500; }
 .texture-panel { width: calc(100% - 96px); margin-inline: auto; height: clamp(220px, 32vw, 470px); overflow: hidden; }
 .texture-panel img { width: 100%; height: 118%; margin-top: -9%; object-fit: cover; transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.04); will-change: transform; }
 
-.flavors { padding-block: 145px; }
+.flavors { position: relative; z-index: 2; padding-block: 145px; background: var(--cream); box-shadow: 0 28px 60px rgba(41,24,20,.14); }
 .section-heading { display: grid; grid-template-columns: 1fr 360px; gap: 80px; align-items: end; margin-bottom: 88px; }
 .section-heading > p { margin: 0; color: rgba(41,24,20,.68); line-height: 1.65; }
 .flavor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -177,22 +177,22 @@ h1, h2, h3 { font-family: var(--font-display), serif; font-weight: 500; }
 .flavor-card--mango .flavor-card__scoop { background: #e6a92f; }
 .availability { margin: 26px 0 0; text-align: right; font-size: 11px; color: rgba(41,24,20,.6); }
 
-.chef { display: grid; grid-template-columns: 1fr 1fr; background: var(--wine); color: #fff8f0; }
-.chef__portrait { min-height: 650px; max-height: 720px; position: relative; overflow: hidden; }
-.chef__portrait::after { content: ""; position: absolute; inset: 0; z-index: 2; background: var(--coral); transform: translateX(0); transition: transform 1.3s .1s cubic-bezier(.72,0,.2,1); }
-.chef__portrait img { width: 100%; height: 112%; margin-top: -6%; object-fit: cover; filter: saturate(.82); --portrait-scale: 1.1; transform: translate3d(0, var(--parallax-y, 0), 0) scale(var(--portrait-scale)); transition: transform 1.35s cubic-bezier(.2,.7,.2,1); will-change: transform; }
-.chef__portrait.is-visible { --portrait-scale: 1.025; }
-.chef__portrait.is-visible::after { transform: translateX(101%); }
-.chef__portrait[data-reveal] { opacity: 1; transform: none; }
-.chef__portrait-label { position: absolute; z-index: 3; bottom: 24px; left: 24px; padding: 10px 14px; background: var(--cream); color: var(--ink); font-family: var(--font-display), serif; font-size: 20px; font-style: italic; opacity: 0; transform: translateY(16px); transition: opacity .55s .9s ease, transform .65s .9s cubic-bezier(.2,.7,.2,1); }
-.chef__portrait.is-visible .chef__portrait-label { opacity: 1; transform: translateY(0); }
-.chef__copy { padding: clamp(66px, 6.5vw, 105px); display: flex; flex-direction: column; justify-content: center; }
-.chef__copy .eyebrow { color: var(--rose); }
-.chef__lead { font-family: var(--font-display), serif; font-size: clamp(25px, 2vw, 35px); line-height: 1.22; margin: 34px 0 20px; }
-.chef__copy > p:not(.eyebrow):not(.chef__lead) { max-width: 620px; color: rgba(255,248,240,.72); line-height: 1.65; }
-.chef__quote { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.22); font-family: var(--font-display), serif; font-size: 20px; font-style: italic; }
+.chef-window { height: clamp(640px, 88svh, 860px); position: relative; z-index: 1; clip-path: inset(0); isolation: isolate; overflow: hidden; background: var(--wine); color: #fff8f0; }
+.chef-window__stage { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100svh; overflow: hidden; background: var(--wine); }
+.chef-window__stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(38,13,20,.88) 0%, rgba(38,13,20,.64) 34%, rgba(38,13,20,.08) 69%, rgba(38,13,20,.18) 100%); }
+.chef-window__stage img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 33%; filter: saturate(.78) contrast(1.04); transform: scale(1.045); }
+.chef-window__content { height: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: minmax(430px, .78fr) 1.22fr; gap: 7vw; align-items: end; padding-block: clamp(42px, 5vw, 74px); }
+.chef-window__copy { max-width: 610px; padding: clamp(30px, 3.6vw, 52px); border: 1px solid rgba(255,255,255,.2); background: rgba(64,20,31,.72); backdrop-filter: blur(12px); box-shadow: 0 30px 80px rgba(25,8,12,.2); }
+.chef-window__copy .eyebrow { color: var(--rose); }
+.chef-window__copy h2 { font-size: clamp(54px, 5.6vw, 88px); }
+.chef-window__lead { font-family: var(--font-display), serif; font-size: clamp(23px, 1.8vw, 31px); line-height: 1.2; margin: 28px 0 17px; }
+.chef-window__copy > p:not(.eyebrow):not(.chef-window__lead) { max-width: 540px; margin-bottom: 0; color: rgba(255,248,240,.74); line-height: 1.55; font-size: 13px; }
+.chef-window__quote { margin-top: 24px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.22); font-family: var(--font-display), serif; font-size: 18px; font-style: italic; }
+.chef-window__identity { justify-self: end; padding: 13px 17px; display: flex; flex-direction: column; gap: 2px; background: rgba(255,250,243,.93); color: var(--ink); box-shadow: 0 14px 38px rgba(41,24,20,.16); }
+.chef-window__identity span { font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--coral-deep); }
+.chef-window__identity strong { font-family: var(--font-display), serif; font-size: 22px; font-style: italic; font-weight: 500; }
 
-.experience { padding-block: 150px; }
+.experience { position: relative; z-index: 2; padding-block: 150px; background: var(--cream); box-shadow: 0 -28px 60px rgba(41,24,20,.14); }
 .experience-grid { display: grid; grid-template-columns: 1.4fr .8fr; grid-template-rows: 1fr 1fr; gap: 14px; }
 .experience-card { position: relative; min-height: 360px; overflow: hidden; background: #d6bcaa; }
 .experience-card--large { grid-row: 1 / 3; min-height: 734px; }
@@ -273,7 +273,7 @@ footer { padding: 84px 48px 28px; display: grid; grid-template-columns: 1.5fr .5
   .hero h1 em { white-space: normal; }
   .values > div { grid-template-columns: 44px 150px 1fr; }
   .flavor-grid { grid-template-columns: repeat(2, 1fr); }
-  .chef__copy { padding: 80px 60px; }
+  .chef-window__content { grid-template-columns: minmax(390px, .9fr) 1.1fr; }
   .reviews__intro { grid-template-columns: .65fr 1.35fr; gap: 6vw; }
   .stores__heading { grid-template-columns: 1fr 1.5fr; }
   .stores__heading p:last-child { grid-column: 2; }
@@ -308,7 +308,7 @@ footer { padding: 84px 48px 28px; display: grid; grid-template-columns: 1.5fr .5
   .marquee__track { padding-block: 9px; gap: 18px; }
   .marquee span { font-size: 17px; }
   .manifesto { padding-block: 72px 58px; grid-template-columns: 1fr; gap: 34px; }
-  .manifesto h2, .section-heading h2, .stores h2, .chef h2, .visit-banner h2 { font-size: clamp(46px, 13.5vw, 60px); line-height: .88; }
+  .manifesto h2, .section-heading h2, .stores h2, .chef-window h2, .visit-banner h2 { font-size: clamp(46px, 13.5vw, 60px); line-height: .88; }
   .manifesto__intro { font-size: 23px; margin-bottom: 32px; }
   .values > div { grid-template-columns: 38px 1fr; gap: 10px; }
   .values > div { padding-block: 16px; }
@@ -323,13 +323,17 @@ footer { padding: 84px 48px 28px; display: grid; grid-template-columns: 1.5fr .5
   .flavor-card__scoop { width: 180px; height: 150px; top: 58px; }
   .flavor-card h3 { font-size: 31px; }
   .availability { text-align: left; }
-  .chef { grid-template-columns: 1fr; }
-  .chef__portrait { min-height: 395px; max-height: 430px; }
-  .chef__portrait-label { bottom: 16px; left: 16px; font-size: 17px; }
-  .chef__copy { padding: 60px 18px 68px; }
-  .chef__lead { font-size: 24px; margin-top: 28px; }
-  .chef__copy > p:not(.eyebrow):not(.chef__lead) { font-size: 13px; }
-  .chef__quote { margin-top: 24px; font-size: 18px; }
+  .chef-window { height: clamp(610px, 86svh, 720px); }
+  .chef-window__stage::after { background: linear-gradient(0deg, rgba(38,13,20,.94) 0%, rgba(38,13,20,.62) 48%, rgba(38,13,20,.04) 78%); }
+  .chef-window__stage img { object-position: 52% 28%; transform: scale(1.02); }
+  .chef-window__content { width: 100%; grid-template-columns: 1fr; align-items: end; padding: 0 16px 16px; }
+  .chef-window__copy { max-width: none; padding: 23px 20px; background: rgba(64,20,31,.72); backdrop-filter: blur(9px); }
+  .chef-window__copy h2 { font-size: clamp(43px, 12vw, 54px); }
+  .chef-window__lead { font-size: 20px; margin: 18px 0 12px; }
+  .chef-window__copy > p:not(.eyebrow):not(.chef-window__lead) { font-size: 12px; line-height: 1.45; }
+  .chef-window__quote { margin-top: 16px; padding-top: 13px; font-size: 16px; }
+  .chef-window__identity { position: absolute; top: 16px; right: 16px; padding: 10px 12px; }
+  .chef-window__identity strong { font-size: 18px; }
   .experience { padding-block: 72px; }
   .experience-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
   .experience-card, .experience-card--large { min-height: 385px; grid-row: auto; }
@@ -372,4 +376,5 @@ footer { padding: 84px 48px 28px; display: grid; grid-template-columns: 1.5fr .5
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   [data-reveal] { opacity: 1; transform: none; }
+  .chef-window__stage { position: absolute; height: 100%; }
 }
