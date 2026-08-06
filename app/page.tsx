@@ -58,18 +58,20 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.13 },
+      { threshold: 0.08 },
     );
 
     nodes.forEach((node) => observer.observe(node));
 
     let frame = 0;
     const updateParallax = () => {
+      const mobileBoost = window.innerWidth <= 760 ? 1.65 : 1;
       parallaxNodes.forEach((node) => {
         const rect = node.getBoundingClientRect();
         const speed = Number(node.dataset.parallax ?? 0.05);
         const distance = window.innerHeight / 2 - (rect.top + rect.height / 2);
-        node.style.setProperty("--parallax-y", `${distance * speed}px`);
+        const movement = Math.max(-72, Math.min(72, distance * speed * mobileBoost));
+        node.style.setProperty("--parallax-y", `${movement}px`);
       });
       frame = 0;
     };
@@ -145,7 +147,7 @@ export default function Home() {
         </div>
 
         <div className="hero__visual" aria-label="Gelatos Tayti servidos em casquinhas">
-          <div className="hero__photo-wrap" data-parallax="0.035">
+          <div className="hero__photo-wrap" data-parallax="0.06">
             <img src="/images/gelato-detail-01.jpg" alt="Três gelatos Tayti servidos em casquinhas" />
           </div>
           <div className="hero__seal" aria-hidden="true">
@@ -166,7 +168,7 @@ export default function Home() {
       </div>
 
       <section className="manifesto section-shell" id="sabores">
-        <span className="manifesto__orb" data-parallax="0.1" aria-hidden="true" />
+        <span className="manifesto__orb" data-parallax="0.14" aria-hidden="true" />
         <div className="manifesto__heading" data-reveal>
           <p className="eyebrow">Nosso jeito de fazer</p>
           <h2>Menos pressa.<br />Mais sabor.</h2>
@@ -186,7 +188,7 @@ export default function Home() {
       </section>
 
       <section className="texture-panel" data-reveal>
-        <img data-parallax="0.035" src="/images/gelatos.jpg" alt="Texturas de diferentes sabores de gelato Tayti" />
+        <img data-parallax="0.075" src="/images/gelatos.jpg" alt="Texturas de diferentes sabores de gelato Tayti" />
       </section>
 
       <section className="flavors section-shell">
@@ -215,7 +217,7 @@ export default function Home() {
 
       <section className="chef" id="chef">
         <div className="chef__portrait" data-reveal>
-          <img data-parallax="0.035" src="/images/chef-elisabeth.jpg" alt="Chef Elisabeth Tayti em sua cozinha" />
+          <img data-parallax="0.065" src="/images/chef-elisabeth.jpg" alt="Chef Elisabeth Tayti em sua cozinha" />
           <span className="chef__portrait-label">Elisabeth Tayti</span>
         </div>
         <div className="chef__copy" data-reveal>
@@ -319,7 +321,7 @@ export default function Home() {
       </section>
 
       <section className="visit-banner">
-        <div className="visit-banner__photo"><img data-parallax="0.035" src="/images/loja-moema.jpg" alt="Ambiente acolhedor de uma loja Tayti ao anoitecer" /></div>
+        <div className="visit-banner__photo"><img data-parallax="0.065" src="/images/loja-moema.jpg" alt="Ambiente acolhedor de uma loja Tayti ao anoitecer" /></div>
         <div className="visit-banner__copy" data-reveal>
           <p className="eyebrow">Fique mais um pouco</p>
           <h2>Um lugar para provar, conversar e voltar.</h2>
